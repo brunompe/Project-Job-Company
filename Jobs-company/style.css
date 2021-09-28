@@ -2,18 +2,27 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  background-color: antiquewhite;
+  background-color: rgba(181, 236, 220, 0.109);
 }
 
 header {
   /* display: flex; */
-  /* justify-content: space-between; */
+  justify-content: space-between;
   align-items: center;
+<<<<<<< HEAD
   background-color: green;
   margin: 20px 60px;
   height: 250px;
   padding: 100px;
   border-radius: 10px;
+=======
+  /* background-color: green; */
+  /* margin: 20px 60px; */
+  height: 150px;
+  padding: 30px;
+  border-radius: 20px;
+  border: 10px solid green;
+>>>>>>> fabiana
 }
 
 .title-image {
@@ -35,4 +44,20 @@ header {
 .form-header-option {
   height: 30px;
   font-size: 15px;
+}
+
+.results {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 20px;
+}
+
+.job-card {
+    border: solid rgb(32, 114, 21) 1px;
+    margin: 20px;
+}
+
+.job-card:hover {
+    border: solid black 3px;
+    cursor: pointer;
 }
