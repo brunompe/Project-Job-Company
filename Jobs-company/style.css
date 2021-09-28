@@ -48,10 +48,11 @@ header {
 }
 
 .job-card {
-    border: solid rgb(32, 114, 21) 1px;
+    border: solid rgb(32, 114, 21) 2px;
     margin: 20px;
     display: flex column;
     justify-content: center;
+    border-radius: 5px;
 }
 
 .job-card:hover {
@@ -82,4 +83,5 @@ main {
 
 .selected-job {
   max-width: 40%;
+  border: solid 1px black;
 }

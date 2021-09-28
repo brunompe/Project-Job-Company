@@ -1,4 +1,3 @@
-
 const URL_ROOT = "https://api.adzuna.com/v1/api";
 const APPLICATION_ID = "ad6b23fa";
 const APPLICATION_KEYS = "6ea121a2ddb2e9a6552a6ec0e59b04c1";
@@ -7,10 +6,11 @@ const form_header_option = document.querySelector(".btn-submit");
 const input_job = document.querySelector(".input-job");
 const input_location = document.querySelector(".input-location");
 const div_results = document.querySelector(".results");
-const selectedJob = document.querySelector('.selected-job');
+const selectedJob = document.querySelector(".selected-job");
 
 let job;
 let country;
+let data;
 
 function takeInputsData(event) {
   event.preventDefault();
@@ -29,23 +29,37 @@ function clear() {
   div_results.innerHTML = "";
 }
 
-async function moreInfo(event) {
-  selectedJob.innerHTML = '';
-  // const divDescription = document.createElement('div');
-  // divDescription.className = "job-description";
+// async function moreInfo(event) {
+//   selectedJob.innerHTML = '';
+//   // const divDescription = document.createElement('div');
+//   // divDescription.className = "job-description";
+//   let id;
+//   if (event.target.className === 'job-card') {
+//     id = event.target.id;
+//   } else {
+//     id = event.target.closest('.job-card').id;
+//   }
+//   const jobObj = await fetch(`http://api.adzuna.com/v1/api/jobs/${country}/search/1?app_id=${APPLICATION_ID}&app_key=${APPLICATION_KEYS}&results_per_page=50&what=${job}&content-type=application/json`)
+//   .then(r => r.json())
+//   .then (response => response.results.find((job) => {
+//     return job.id === id;
+//   }));
+//   selectedJob.innerText = jobObj.description;
+//   // selectedJob.appendChild(divDescription);
+// }
+
+function moreInfo(event) {
   let id;
   if (event.target.className === 'job-card') {
     id = event.target.id;
   } else {
     id = event.target.closest('.job-card').id;
   }
-  const jobObj = await fetch(`http://api.adzuna.com/v1/api/jobs/${country}/search/1?app_id=${APPLICATION_ID}&app_key=${APPLICATION_KEYS}&results_per_page=50&what=${job}&content-type=application/json`)
-  .then(r => r.json())
-  .then (response => response.results.find((job) => {
+  const jobObj = data.find((job) => {
     return job.id === id;
-  }));
+  });
+  console.log(jobObj)
   selectedJob.innerText = jobObj.description;
-  // selectedJob.appendChild(divDescription);  
 }
 
 function createJobTitle(result) {
@@ -76,7 +90,6 @@ function createJobCompany(result) {
   } else {
     jobCompany.innerText = "";
   }
-  // jobCompany.innerText = resultCompanyName;
   return jobCompany;
 }
 
@@ -85,7 +98,6 @@ function createDiv(result) {
   div.className = "job-card";
   div.id = result.id;
   div.addEventListener("click", moreInfo);
-  // div.addEventListener('click', addClassList);
   return div;
 }
 
@@ -95,29 +107,28 @@ function divChildCard() {
   return div;
 }
 
-function makeRequest(param1, param2) {
-  fetch(
+function makeCards(result) {
+  const div = createDiv(result);
+  const divChild = divChildCard();
+  const title = createJobTitle(result);
+  const company = createJobCompany(result);
+  const local = createJobLocation(result);
+  div.appendChild(title);
+  div.appendChild(divChild);
+  divChild.appendChild(local);
+  divChild.appendChild(company);
+  div_results.appendChild(div);
+}
+
+async function makeRequest(param1, param2) {
+  const fetchRequest = await fetch(
     `http://api.adzuna.com/v1/api/jobs/${param2}/search/1?app_id=${APPLICATION_ID}&app_key=${APPLICATION_KEYS}&results_per_page=50&what=${param1}&content-type=application/json`
-  )
-    .then((r) => r.json())
-    .then((response) => response.results)
-    // .then(results => console.log(results))
-    .then((results) =>
-      results.forEach((result) => {
-        const div = createDiv(result);
-        const divChild = divChildCard();
-        const title = createJobTitle(result);
-        const company = createJobCompany(result);
-        const local = createJobLocation(result);
-        div.appendChild(title);
-        divChild.appendChild(company);
-        divChild.appendChild(local);
-        div.appendChild(divChild);
-        div_results.appendChild(div);
-      })
-    );
+  );
+  const response = await fetchRequest.json();
+  data = response.results;
+  data.forEach((result) => makeCards(result));
 }
 
 window.onload = async () => {
-  // await makeRequest('javascript%20developer', 'br');
+  await makeRequest("javascript%20developer", "br");
 };
