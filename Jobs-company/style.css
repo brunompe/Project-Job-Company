@@ -9,20 +9,12 @@ header {
   /* display: flex; */
   justify-content: space-between;
   align-items: center;
-<<<<<<< HEAD
-  background-color: green;
-  margin: 20px 60px;
-  height: 250px;
-  padding: 100px;
-  border-radius: 10px;
-=======
   /* background-color: green; */
   /* margin: 20px 60px; */
   height: 150px;
   padding: 30px;
   border-radius: 20px;
   border: 10px solid green;
->>>>>>> fabiana
 }
 
 .title-image {
@@ -44,20 +36,50 @@ header {
 .form-header-option {
   height: 30px;
   font-size: 15px;
+  /* display: none; */
 }
 
 .results {
     display: flex;
     flex-wrap: wrap;
     margin: 20px;
+    border: solid 1px black;
+    width: 40%
 }
 
 .job-card {
     border: solid rgb(32, 114, 21) 1px;
     margin: 20px;
+    display: flex column;
+    justify-content: center;
 }
 
 .job-card:hover {
     border: solid black 3px;
     cursor: pointer;
+    transition: 0.2s;
+}
+
+.div-company-location {
+  display: flex;
+}
+
+h3 {
+  text-align: center;
+}
+
+.job-description {
+  position: relative;
+  width: 50%;
+  height: 50%;
+  background-color: white;
+  /* visibility: hidden; */
+}
+
+main {
+  display: flex;
+}
+
+.selected-job {
+  max-width: 40%;
 }
