@@ -13,3 +13,5 @@ function getData() {
   const response = fetch('https://data.usajobs.gov/api/search');
   console.log(response);
 }
+
+console.log('TESTE')
