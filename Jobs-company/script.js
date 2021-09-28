@@ -1,17 +1,40 @@
-function getData() {
-  const API_KEY = 'Hwo8Lqnu2EDBVXyyMJz4whuSDfCPPglwMRIoxqsD+DM=';
-  const request = {
-    url: 'data.usajobs.gov',
-    method: 'GET',
-    headers: {
-      'Host': 'data.usajobs.gov',
-      'User-Agent': 'brunompe@gmail.com',
-      'Authorization-Key': API_KEY,
-    }
-  }
+const URL_ROOT = 'https://api.adzuna.com/v1/api';
+const APPLICATION_ID = '3fabcb1c';
+const APPLICATION_KEYS = '268aee69acbf19580edb1fffc3c06fbb';
 
-  const response = fetch('https://data.usajobs.gov/api/search');
-  console.log(response);
+const form_header_option = document.querySelector('.btn-submit');
+const input_job = document.querySelector('.input-job');
+const input_location = document.querySelector('.input-location');
+const div_results = document.querySelector('.results');
+
+let job;
+let country;
+
+function takeInputsData(event) {
+  event.preventDefault();
+  job = input_job.value.replace(' ', '%20').toLowerCase();
+  country = input_location.value;
+  makeRequest(job, country);
 }
 
-console.log('TESTE')
+function addEventOnButtons() {
+  form_header_option.addEventListener('click', takeInputsData);
+}
+addEventOnButtons();
+
+function makeRequest(param1, param2) {
+  fetch(`http://api.adzuna.com/v1/api/jobs/${param2}/search/1?app_id=3fabcb1c&app_key=268aee69acbf19580edb1fffc3c06fbb&results_per_page=50&what=${param1}&content-type=application/json`)
+    .then(r => r.json())
+    .then(response => response.results)
+    // .then(results => console.log(results))
+    .then(results => results.forEach((result) => {
+      const paragraph = document.createElement('p');
+      paragraph.className = 'names';
+      paragraph.innerText = result.title;
+      div_results.appendChild(paragraph);
+    }))
+}
+
+window.onload = async () => {
+  await makeRequest('javascript%20developer', 'br');
+}
