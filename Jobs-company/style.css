@@ -42,27 +42,37 @@ header {
 .results {
     display: flex;
     flex-wrap: wrap;
+    justify-content: center;
     margin: 20px;
     border: solid 1px black;
     width: 40%
+    
 }
 
 .job-card {
     border: solid rgb(32, 114, 21) 2px;
-    margin: 20px;
+    margin: 5px 3px;
     display: flex column;
     justify-content: center;
     border-radius: 5px;
+    padding: 5px;
 }
 
 .job-card:hover {
     border: solid black 3px;
     cursor: pointer;
     transition: 0.2s;
+    background-color: rgb(184, 250, 195);
 }
 
 .div-company-location {
   display: flex;
+}
+
+.div-company-location p {
+  margin: 2px;
+  padding: 3px;
+  border: 2px solid rgb(24, 61, 34);
 }
 
 h3 {

@@ -127,6 +127,7 @@ async function makeRequest(param1, param2) {
   const response = await fetchRequest.json();
   data = response.results;
   data.forEach((result) => makeCards(result));
+  console.log(data);
 }
 
 window.onload = async () => {
