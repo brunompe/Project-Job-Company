@@ -1,6 +1,6 @@
 const URL_ROOT = "https://api.adzuna.com/v1/api";
-const APPLICATION_ID = "de36c9ed";
-const APPLICATION_KEYS = "51089981bd89148881fc7843cae1dd8f";
+const APPLICATION_ID = "17b53278";
+const APPLICATION_KEYS = "f2796d62235042b6c9c808a32e6b3241";
 
 const form_header_option = document.querySelector(".btn-submit");
 const input_job = document.querySelector(".input-job");
