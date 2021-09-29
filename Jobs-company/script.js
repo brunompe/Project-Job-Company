@@ -29,25 +29,6 @@ function clear() {
   div_results.innerHTML = "";
 }
 
-// async function moreInfo(event) {
-//   selectedJob.innerHTML = '';
-//   // const divDescription = document.createElement('div');
-//   // divDescription.className = "job-description";
-//   let id;
-//   if (event.target.className === 'job-card') {
-//     id = event.target.id;
-//   } else {
-//     id = event.target.closest('.job-card').id;
-//   }
-//   const jobObj = await fetch(`http://api.adzuna.com/v1/api/jobs/${country}/search/1?app_id=${APPLICATION_ID}&app_key=${APPLICATION_KEYS}&results_per_page=50&what=${job}&content-type=application/json`)
-//   .then(r => r.json())
-//   .then (response => response.results.find((job) => {
-//     return job.id === id;
-//   }));
-//   selectedJob.innerText = jobObj.description;
-//   // selectedJob.appendChild(divDescription);
-// }
-
 function moreInfo(event) {
   let id;
   if (event.target.className === 'job-card') {
@@ -122,7 +103,7 @@ function makeCards(result) {
 
 async function makeRequest(param1, param2) {
   const fetchRequest = await fetch(
-    `http://api.adzuna.com/v1/api/jobs/${param2}/search/1?app_id=${APPLICATION_ID}&app_key=${APPLICATION_KEYS}&results_per_page=50&what=${param1}&content-type=application/json`
+    `${URL_ROOT}/jobs/${param2}/search/1?app_id=${APPLICATION_ID}&app_key=${APPLICATION_KEYS}&results_per_page=50&what=${param1}&content-type=application/json`
   );
   const response = await fetchRequest.json();
   data = response.results;
