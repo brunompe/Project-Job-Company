@@ -89,6 +89,7 @@ function createJobCompany(result) {
     jobCompany.innerText = resultCompanyName;
   } else {
     jobCompany.innerText = "";
+    jobCompany.style.display = 'none';
   }
   return jobCompany;
 }
@@ -127,7 +128,7 @@ async function makeRequest(param1, param2) {
   const response = await fetchRequest.json();
   data = response.results;
   data.forEach((result) => makeCards(result));
-  console.log(data);
+  // console.log(data);
 }
 
 window.onload = async () => {

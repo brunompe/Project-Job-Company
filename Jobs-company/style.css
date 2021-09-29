@@ -42,10 +42,9 @@ header {
 .results {
     display: flex;
     flex-wrap: wrap;
-    justify-content: center;
-    margin: 20px;
-    border: solid 1px black;
-    width: 40%
+    justify-content: center;    
+    width: 40%;
+    background-color: rgb(215, 250, 231);
     
 }
 
@@ -67,6 +66,7 @@ header {
 
 .div-company-location {
   display: flex;
+  justify-content:center;
 }
 
 .div-company-location p {
