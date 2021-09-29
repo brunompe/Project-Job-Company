@@ -2,13 +2,29 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  /* background-color: rgba(181, 236, 220, 0.109); */
-  /* background-color: rgb(40, 42, 47); */
   font-family: "Montserrat", sans-serif;
 }
 
-body {
-  background-image: url(./images/undraw_Co-working_re_w93t.svg);
+.results {
+  position: relative;
+  display: block;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin: 0px 20px 20px 20px;
+  border-radius: 10px;
+}
+
+.results::after {
+  content: "";
+  background: linear-gradient(rgba(0, 0, 0, 0.1), rgb(134, 134, 134)) , url(./images/undraw_Co-working_re_w93t.svg);
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  position: absolute;
+  z-index: -1;
+  opacity: 0.6;
 }
 
 header {
@@ -17,13 +33,24 @@ header {
   align-items: center;
   height: 150px;
   padding: 30px;
+  margin: 0px 20px 0px 20px;
   border-radius: 10px;
   border: 3px solid rgb(62, 66, 75);
 }
 
-/* .title-header {
-  margin-left: 150px;
-} */
+header::after {
+  content: "";
+  margin: 0px 20px 20px 20px;
+  border-radius: 10px;
+  background: linear-gradient(rgba(0, 0, 0, 0.1), rgb(204, 204, 204)) , url(./images/iStock-825493738.jpg);
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  position: absolute;
+  z-index: -1;
+  opacity: 0.6;
+}
 
 .form-header {
   display: flex;
@@ -35,25 +62,16 @@ header {
 .form-header-option {
   height: 30px;
   font-size: 15px;
-  /* display: none; */
-}
-
-.results {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  margin: 20px;
-  /* border: 3px solid rgb(62, 66, 75); */
 }
 
 .job-card {
-  border: solid rgb(173, 173, 173) 2px;
+  border: solid rgb(129, 129, 129) 2px;
   margin: 5px 3px;
   display: flex column;
   justify-content: center;
   border-radius: 5px;
   padding: 5px;
-  background-color: rgba(181, 236, 220, 0.109);
+  background-color: rgba(181, 220, 236, 0.3);
   font-weight: bolder;
 }
 
@@ -61,7 +79,7 @@ header {
   border: solid black 3px;
   cursor: pointer;
   transition: 0.2s;
-  background-color: rgb(184, 250, 195);
+  background-color: rgb(161, 191, 255);
 }
 
 .div-company-location p {
@@ -86,6 +104,7 @@ h3 {
   font-weight: bolder;
   vertical-align: middle;
   text-align: center;
+  height: 40px;
 }
 
 .div-btn {
@@ -95,6 +114,19 @@ h3 {
 
 .loading {
   text-align: center;
+  font-size: x-large;
   width: 100%;
   margin: 50px auto;
+}
+
+.input-job {
+  height: 40px;
+}
+
+.input-location {
+  height: 40px;
+}
+
+.form-control {
+  height: 40px;
 }

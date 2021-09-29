@@ -1,6 +1,6 @@
 const URL_ROOT = "https://api.adzuna.com/v1/api";
-const APPLICATION_ID = "821d005c";
-const APPLICATION_KEYS = "360769adf916a46acea335bb054ed356";
+const APPLICATION_ID = "de36c9ed";
+const APPLICATION_KEYS = "51089981bd89148881fc7843cae1dd8f";
 
 const form_header_option = document.querySelector(".btn-submit");
 const input_job = document.querySelector(".input-job");
@@ -18,6 +18,7 @@ const contract_time_modal = document.querySelector('.contract-time');
 const description_modal = document.querySelector('.description');
 const salary_min_modal = document.querySelector('.salary-min');
 const salary_max_modal = document.querySelector('.salary-max');
+const redirect_url_modal = document.querySelector('.redirect-url-modal');
 
 let job;
 let country;
@@ -45,7 +46,6 @@ function addEventOnButtons() {
 
 function clear() {
   div_results.innerHTML = "";
-  // selected_job.innerHTML = "";
 }
 function findIncomplete(string) {
   if (string.endsWith('\u2026')) {
@@ -64,7 +64,7 @@ function createAllElementsOfPopUp() {
   return { newH2, paragraphCategory, paragraphLocation, paragraphDescription };
 }
 
-function createPopUpDetails({ title, description, location, category, company, contract_time, salary_min, salary_max }) {
+function createPopUpDetails({ title, description, location, category, company, contract_time, salary_min, salary_max, redirect_url }) {
   h3_modal.innerText = title;
   company_modal.innerHTML = `<b>Empresa:</b> ${company.display_name ? company.display_name : 'Não Listada'}`;
   category_modal.innerHTML = `<b>Categoria:</b> ${category.label ? category.label : 'Indefinida'}`;
@@ -73,7 +73,7 @@ function createPopUpDetails({ title, description, location, category, company, c
   description_modal.innerHTML = `<b>Descrição da vaga:</b> ${findIncomplete(description)}`;
   salary_min_modal.innerHTML = `<b>Salário mínimo estimado:</b> ${salary_min ? salary_min : 'A combinar.'}`;
   salary_max_modal.innerHTML = `<b>Salário máximo estimado:</b> ${salary_max ? salary_max : 'A combinar.'}`;
-  // console.log(data);
+  redirect_url_modal.href = redirect_url;
 }
 
 function moreInfo(event) {
@@ -161,6 +161,6 @@ async function makeRequest(job, country, numberPerPage) {
 }
 
 window.onload = async () => {
-  // await makeRequest("javascript%20developer", "br", 20);
+  await makeRequest("javascript%20developer", "br", 20);
   addEventOnButtons();
 };
