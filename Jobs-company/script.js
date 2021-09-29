@@ -1,33 +1,42 @@
 const URL_ROOT = "https://api.adzuna.com/v1/api";
-const APPLICATION_ID = "ad6b23fa";
-const APPLICATION_KEYS = "6ea121a2ddb2e9a6552a6ec0e59b04c1";
+const APPLICATION_ID = "821d005c";
+const APPLICATION_KEYS = "360769adf916a46acea335bb054ed356";
 
 const form_header_option = document.querySelector(".btn-submit");
 const input_job = document.querySelector(".input-job");
 const input_location = document.querySelector(".input-location");
 const div_results = document.querySelector(".results");
-const selectedJob = document.querySelector(".selected-job");
+const selected_job = document.querySelector(".selected-job");
+const input_number = document.querySelector('#input-number');
+const loading = document.querySelector('.loading');
 
 let job;
 let country;
+let numberPerPage;
 let data;
 
 function takeInputsData(event) {
   event.preventDefault();
+  loading.innerHTML = 'Loading...';
   job = input_job.value.replace(" ", "%20").toLowerCase();
   country = input_location.value;
+  if (input_number.value > 0) {
+    numberPerPage = input_number.value;
+  } else {
+    numberPerPage = 20;
+  }
   clear();
-  makeRequest(job, country);
+  makeRequest(job, country, numberPerPage);
 }
 
 function addEventOnButtons() {
   form_header_option.addEventListener("click", takeInputsData);
 }
-addEventOnButtons();
+
 
 function clear() {
   div_results.innerHTML = "";
-  selectedJob.innerHTML = "";
+  // selected_job.innerHTML = "";
 }
 function findIncomplete(string) {
   if (string.endsWith('\u2026')) {
@@ -56,21 +65,21 @@ function createPopUpDetails({ title, description, location, category, company, c
   allElementsCreated.newH2.innerText = title;
   allElementsCreated.paragraphCategory.innerText = `Categoria: ${category.label}`;
   allElementsCreated.paragraphLocation.innerText = `Localização: ${location.display_name}`;
-  selectedJob.appendChild(allElementsCreated.newH2);
-  selectedJob.appendChild(allElementsCreated.paragraphCategory);
-  selectedJob.appendChild(allElementsCreated.paragraphLocation);
+  selected_job.appendChild(allElementsCreated.newH2);
+  selected_job.appendChild(allElementsCreated.paragraphCategory);
+  selected_job.appendChild(allElementsCreated.paragraphLocation);
   if (company.display_name) {
     const paragraphCompany = document.createElement('p');
     paragraphCompany.className = 'p-company-pop-up';
     paragraphCompany.innerText = `Empresa: ${company.display_name}`;
-    selectedJob.appendChild(paragraphCompany);
+    selected_job.appendChild(paragraphCompany);
   }
-  selectedJob.appendChild(allElementsCreated.paragraphDescription);
+  selected_job.appendChild(allElementsCreated.paragraphDescription);
   // console.log(data);
 }
 
 function moreInfo(event) {
-  selectedJob.innerHTML = '';
+  selected_job.innerHTML = '';
   let id;
   if (event.target.className === "job-card") {
     id = event.target.id;
@@ -95,9 +104,9 @@ function createJobLocation(result) {
   jobLocation.className = "job-location";
   const jobLocationText = result.location.display_name;
   if (jobLocationText) {
-    jobLocation.innerText = jobLocationText;
+    jobLocation.innerText = `Local: ${jobLocationText}`;
   } else {
-    jobLocation.innerText = "Indefinido";
+    jobLocation.innerText = "Empresa: Não listada";
   }
   return jobLocation;
 }
@@ -107,9 +116,9 @@ function createJobCompany(result) {
   jobCompany.className = "job-company";
   const resultCompanyName = result.company.display_name;
   if (resultCompanyName) {
-    jobCompany.innerText = resultCompanyName;
+    jobCompany.innerText = `Empresa: ${resultCompanyName}`;
   } else {
-    jobCompany.innerText = "Indefinido";
+    jobCompany.innerText = "Empresa: Não listada";
   }
   return jobCompany;
 }
@@ -138,12 +147,13 @@ function makeCards(result) {
   div.appendChild(divChild);
   divChild.appendChild(local);
   divChild.appendChild(company);
+  loading.innerHTML = '';
   div_results.appendChild(div);
 }
 
-async function makeRequest(job, country) {
+async function makeRequest(job, country, numberPerPage) {
   const fetchRequest = await fetch(
-    `${URL_ROOT}/jobs/${country}/search/1?app_id=${APPLICATION_ID}&app_key=${APPLICATION_KEYS}&results_per_page=50&what=${job}&content-type=application/json`
+    `${URL_ROOT}/jobs/${country}/search/1?app_id=${APPLICATION_ID}&app_key=${APPLICATION_KEYS}&results_per_page=${numberPerPage}&what=${job}&content-type=application/json`
   );
   const response = await fetchRequest.json();
   data = response.results;
@@ -151,5 +161,6 @@ async function makeRequest(job, country) {
 }
 
 window.onload = async () => {
-  await makeRequest("javascript%20developer", "br");
+  // await makeRequest("javascript%20developer", "br", 20);
+  addEventOnButtons();
 };

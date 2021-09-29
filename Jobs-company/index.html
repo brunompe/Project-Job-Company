@@ -10,16 +10,17 @@
 
   <body>
     <header>
-      <div>PROCURAR EMPREGO</div>
+      <!-- <img src="./icons8-money-circulation-100.png" alt="icon-target"> -->
+      <img src="./images/icons8-info-64.png" alt="header-icon">
       <section class="form-header">
         <div>
-          <label for="">Tipo de Vaga</label>
+          <label for="input-job">Tipo de Vaga:</label>
           <div>
             <input class='form-header-option input-job' type="text" name="what" id="what" placeholder="emprego, função, cargo...">
           </div>
         </div>
         <div>
-          <label for="">País</label>
+          <label for="">País:</label>
           <div>
             <select class='form-header-option input-location' name="country" id="">
               <option value="br">Brasil</option>
@@ -34,18 +35,25 @@
           </div>
         </div>
         <div>
+          <label for="">Número de Ofertas:</label>
+          <div>
+            <input type="number" name="number" id="input-number" placeholder="50" max="50" min="1">
+          </div>
+        </div>
+        <div>
           <button class='form-header-option btn-submit' type="submit">ENVIAR/SUBMIT</button>
           <button class='form-header-option btn-avanced'>SIMBOLO</button>
         </div>
       </section>
     </header>
     <main>
+      <div class='loading'>Loading...</div>
       <div class="results">
 
       </div>
-      <div class='selected-job'>
+      <!-- <div class='selected-job'>
         
-      </div>
+      </div> -->
     </main>
     <script src="./script.js"></script>
   </body>
