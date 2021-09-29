@@ -27,20 +27,60 @@ addEventOnButtons();
 
 function clear() {
   div_results.innerHTML = "";
+  selectedJob.innerHTML = "";
+}
+function findIncomplete(string) {
+  if (string.endsWith('\u2026')) {
+    array = string.split(/\.|;/).filter((str) => str.length > 0);
+    array.splice(array.length - 1, 1);
+    return array.join(".").concat(".");
+  }
+  return string;
+}
+
+function createAllElementsOfPopUp() {
+  const newH2 = document.createElement('h2');
+  const paragraphCategory = document.createElement('p');
+  const paragraphLocation = document.createElement('p');
+  const paragraphDescription = document.createElement('p');
+  return { newH2, paragraphCategory, paragraphLocation, paragraphDescription };
+}
+
+function createPopUpDetails({ title, description, location, category, company, contract_time, salary_min, salary_max }) {
+  const allElementsCreated = createAllElementsOfPopUp();
+  const fixDescription = findIncomplete(description);
+  allElementsCreated.paragraphDescription.innerText = `Descrição Da Vaga: ${fixDescription}`;
+  allElementsCreated.newH2.className = 'h2-pop-up';
+  allElementsCreated.paragraphCategory.className = 'p-category-pop-up';
+  allElementsCreated.paragraphLocation.className = 'p-location-pop-up';
+  allElementsCreated.newH2.innerText = title;
+  allElementsCreated.paragraphCategory.innerText = `Categoria: ${category.label}`;
+  allElementsCreated.paragraphLocation.innerText = `Localização: ${location.display_name}`;
+  selectedJob.appendChild(allElementsCreated.newH2);
+  selectedJob.appendChild(allElementsCreated.paragraphCategory);
+  selectedJob.appendChild(allElementsCreated.paragraphLocation);
+  if (company.display_name) {
+    const paragraphCompany = document.createElement('p');
+    paragraphCompany.className = 'p-company-pop-up';
+    paragraphCompany.innerText = `Empresa: ${company.display_name}`;
+    selectedJob.appendChild(paragraphCompany);
+  }
+  selectedJob.appendChild(allElementsCreated.paragraphDescription);
+  console.log(data);
 }
 
 function moreInfo(event) {
+  selectedJob.innerHTML = '';
   let id;
-  if (event.target.className === 'job-card') {
+  if (event.target.className === "job-card") {
     id = event.target.id;
   } else {
-    id = event.target.closest('.job-card').id;
+    id = event.target.closest(".job-card").id;
   }
   const jobObj = data.find((job) => {
     return job.id === id;
   });
-  console.log(jobObj)
-  selectedJob.innerText = jobObj.description;
+  createPopUpDetails(jobObj);
 }
 
 function createJobTitle(result) {
@@ -57,7 +97,7 @@ function createJobLocation(result) {
   if (jobLocationText) {
     jobLocation.innerText = jobLocationText;
   } else {
-    jobLocation.innerText = "";
+    jobLocation.innerText = "Indefinido";
   }
   return jobLocation;
 }
@@ -69,7 +109,7 @@ function createJobCompany(result) {
   if (resultCompanyName) {
     jobCompany.innerText = resultCompanyName;
   } else {
-    jobCompany.innerText = "";
+    jobCompany.innerText = "Indefinido";
   }
   return jobCompany;
 }
@@ -101,14 +141,13 @@ function makeCards(result) {
   div_results.appendChild(div);
 }
 
-async function makeRequest(param1, param2) {
+async function makeRequest(job, country) {
   const fetchRequest = await fetch(
-    `${URL_ROOT}/jobs/${param2}/search/1?app_id=${APPLICATION_ID}&app_key=${APPLICATION_KEYS}&results_per_page=50&what=${param1}&content-type=application/json`
+    `${URL_ROOT}/jobs/${country}/search/1?app_id=${APPLICATION_ID}&app_key=${APPLICATION_KEYS}&results_per_page=50&what=${job}&content-type=application/json`
   );
   const response = await fetchRequest.json();
   data = response.results;
   data.forEach((result) => makeCards(result));
-  console.log(data);
 }
 
 window.onload = async () => {
