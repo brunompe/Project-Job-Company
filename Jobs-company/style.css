@@ -1,20 +1,107 @@
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    background-color: antiquewhite;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  /* background-color: rgba(181, 236, 220, 0.109); */
+  /* background-color: rgb(40, 42, 47); */
+  font-family: "Montserrat", sans-serif;
 }
+
+body {
+  background-image: url(./images/undraw_Co-working_re_w93t.svg);
+}
+
 
 header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background-color: green;
-    margin:20px 60px;
-    height: 50px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 150px;
+  padding: 30px;
+  border-radius: 10px;
+  border: 3px solid rgb(62, 66, 75);
 }
-.title-image {
-    display: flex;
-    align-items: center;
 
+/* .title-header {
+  margin-left: 150px;
+} */
+
+.form-header {
+  display: flex;
+  justify-content: space-evenly;
+  width: 100%;
+  align-items: end;
 }
+
+.form-header-option {
+  height: 30px;
+  font-size: 15px;
+  /* display: none; */
+}
+
+.results {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin: 20px;
+  /* border: 3px solid rgb(62, 66, 75); */
+}
+
+.job-card {
+  border: solid rgb(173, 173, 173) 2px;
+  margin: 5px 3px;
+  display: flex column;
+  justify-content: center;
+  border-radius: 5px;
+  padding: 5px;
+  /*background-color: rgba(181, 236, 220, 0.109);*/
+  background-color: rgb(216, 253, 248);
+  font-weight: bolder;
+  opacity: 1;
+}
+
+.job-card:hover {
+  border: solid black 3px;
+  cursor: pointer;
+  transition: 0.2s;
+  background-color: rgb(195, 255, 235);
+}
+
+.div-company-location p {
+  margin: 2px;
+  padding: 3px;
+  border: 2px solid rgb(24, 61, 34);
+}
+
+h3 {
+  text-align: center;
+}
+
+.modal-title {
+  font-weight: bolder;
+}
+
+.pop-up-style {
+  margin: 5px;
+}
+
+.btn-submit {
+  font-weight: bolder;
+  vertical-align: middle;
+  text-align: center;
+}
+
+.div-btn {
+  vertical-align: middle;
+  text-align: center;
+}
+
+.loading {
+  text-align: center;
+  width: 100%;
+  margin: 50px auto;
+}
+.header-icon {
+  width: 100px;
+}
+
