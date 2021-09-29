@@ -1,32 +1,60 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
     <title>Document</title>
-</head>
-<body>
-  <header>
-    <section class="title-image">
-      <img src="" alt="">
-      <h1>Título top</h1>
-    </section>
-    <section>
-      <form action="" method="get">
-        <label for="job"><input type="text" name="job" placeholder="job"></label>
-        <label for="job">
-          <select  name="job" placeholder="level">
-            <option value="Junior">Junior</option>
-            <option value="Pleno">Pleno</option>
-            <option value="Senior">Senior</option>
+  </head>
+
+  <body>
+    <header>
+      <!-- <img src="./icons8-money-circulation-100.png" alt="icon-target"> -->
+      <img src="./images/icons8-info-64.png" alt="header-icon">
+      <section class="form-header">
+        <div>
+          <label for="input-job">Tipo de Vaga:</label>
+          <div>
+            <input class='form-header-option input-job' type="text" name="what" id="what" placeholder="emprego, função, cargo...">
+          </div>
+        </div>
+        <div>
+          <label for="">País:</label>
+          <div>
+            <select class='form-header-option input-location' name="country" id="">
+              <option value="br">Brasil</option>
+              <option value="gb">Grã-Bretanha</option>
+              <option value="de">Alemanha</option>
+              <option value="ca">Canadá</option>
+              <option value="us">Estados Unidos</option>
+              <option value="au">Austrália</option>
+              <option value="fr">França</option>
+              <option value="ru">Rússia</option>
             </select>
-          </label>
-        <button type="submit">Submit</button>
-      </form>
-    </section>
-  </header>
-  <script src="./script.js"></script>
-</body>
+          </div>
+        </div>
+        <div>
+          <label for="">Número de Ofertas:</label>
+          <div>
+            <input type="number" name="number" id="input-number" placeholder="50" max="50" min="1">
+          </div>
+        </div>
+        <div>
+          <button class='form-header-option btn-submit' type="submit">ENVIAR/SUBMIT</button>
+          <button class='form-header-option btn-avanced'>SIMBOLO</button>
+        </div>
+      </section>
+    </header>
+    <main>
+      <div class='loading'>Loading...</div>
+      <div class="results">
+
+      </div>
+      <!-- <div class='selected-job'>
+        
+      </div> -->
+    </main>
+    <script src="./script.js"></script>
+  </body>
 </html>
