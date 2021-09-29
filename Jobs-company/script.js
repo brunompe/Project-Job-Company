@@ -66,7 +66,7 @@ function createPopUpDetails({ title, description, location, category, company, c
     selectedJob.appendChild(paragraphCompany);
   }
   selectedJob.appendChild(allElementsCreated.paragraphDescription);
-  console.log(data);
+  // console.log(data);
 }
 
 function moreInfo(event) {
