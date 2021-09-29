@@ -9,6 +9,15 @@ const div_results = document.querySelector(".results");
 const selected_job = document.querySelector(".selected-job");
 const input_number = document.querySelector('#input-number');
 const loading = document.querySelector('.loading');
+const h3_modal = document.querySelector('.modal-title');
+const modal_body = document.querySelector('.modal-body');
+const company_modal = document.querySelector('.company');
+const category_modal = document.querySelector('.category');
+const location_modal = document.querySelector('.location');
+const contract_time_modal = document.querySelector('.contract-time');
+const description_modal = document.querySelector('.description');
+const salary_min_modal = document.querySelector('.salary-min');
+const salary_max_modal = document.querySelector('.salary-max');
 
 let job;
 let country;
@@ -56,30 +65,18 @@ function createAllElementsOfPopUp() {
 }
 
 function createPopUpDetails({ title, description, location, category, company, contract_time, salary_min, salary_max }) {
-  const allElementsCreated = createAllElementsOfPopUp();
-  const fixDescription = findIncomplete(description);
-  allElementsCreated.paragraphDescription.innerText = `Descrição Da Vaga: ${fixDescription}`;
-  allElementsCreated.newH2.className = 'h2-pop-up';
-  allElementsCreated.paragraphCategory.className = 'p-category-pop-up';
-  allElementsCreated.paragraphLocation.className = 'p-location-pop-up';
-  allElementsCreated.newH2.innerText = title;
-  allElementsCreated.paragraphCategory.innerText = `Categoria: ${category.label}`;
-  allElementsCreated.paragraphLocation.innerText = `Localização: ${location.display_name}`;
-  selected_job.appendChild(allElementsCreated.newH2);
-  selected_job.appendChild(allElementsCreated.paragraphCategory);
-  selected_job.appendChild(allElementsCreated.paragraphLocation);
-  if (company.display_name) {
-    const paragraphCompany = document.createElement('p');
-    paragraphCompany.className = 'p-company-pop-up';
-    paragraphCompany.innerText = `Empresa: ${company.display_name}`;
-    selected_job.appendChild(paragraphCompany);
-  }
-  selected_job.appendChild(allElementsCreated.paragraphDescription);
+  h3_modal.innerText = title;
+  company_modal.innerHTML = `<b>Empresa:</b> ${company.display_name ? company.display_name : 'Não Listada'}`;
+  category_modal.innerHTML = `<b>Categoria:</b> ${category.label ? category.label : 'Indefinida'}`;
+  location_modal.innerHTML = `<b>Local:</b> ${location.display_name ? location.display_name : 'Não declarado'}`;
+  contract_time_modal.innerHTML = `<b>Período:</b> ${contract_time ? contract_time : 'Indefinido'}`;
+  description_modal.innerHTML = `<b>Descrição da vaga:</b> ${findIncomplete(description)}`;
+  salary_min_modal.innerHTML = `<b>Salário mínimo estimado:</b> ${salary_min ? salary_min : 'A combinar.'}`;
+  salary_max_modal.innerHTML = `<b>Salário máximo estimado:</b> ${salary_max ? salary_max : 'A combinar.'}`;
   // console.log(data);
 }
 
 function moreInfo(event) {
-  selected_job.innerHTML = '';
   let id;
   if (event.target.className === "job-card") {
     id = event.target.id;
@@ -126,6 +123,8 @@ function createJobCompany(result) {
 function createDiv(result) {
   const div = document.createElement("div");
   div.className = "job-card";
+  div.setAttribute('data-bs-toggle', 'modal');
+  div.setAttribute('data-bs-target', '#job-modal');
   div.id = result.id;
   div.addEventListener("click", moreInfo);
   return div;
@@ -148,6 +147,7 @@ function makeCards(result) {
   divChild.appendChild(local);
   divChild.appendChild(company);
   loading.innerHTML = '';
+  div_results.style.border = '3px solid rgb(62, 66, 75)';
   div_results.appendChild(div);
 }
 
